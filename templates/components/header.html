@@ -5,7 +5,10 @@
     <div id="logo">
         <a href="/" class="logo_text">Knower</a>
     </div>
-    <div id="auth">
-        <button class="auth_btn">Logout</button>
+    <div>
+        <form method="post" id="auth" action="{% url 'common:logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="auth_btn">Logout</button>
+        </form>
     </div>
 </header>

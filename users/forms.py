@@ -1,26 +1,11 @@
-from django import forms
+from django.contrib.auth import forms
+from django.core.exceptions import ValidationError
 from users.models import User
 
 
-class LoginForm(forms.Form):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={"placeholder": "E-mail"}))
-    password = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder": "Password"})
-    )
-
-    def clean(self):
-        email = self.cleaned_data.get("email")
-        password = self.cleaned_data.get("password")
-
-        try:
-            existing_user = User.objects.get(email=email)
-            if existing_user.check_password(password):
-                return self.cleaned_data
-            else:
-                self.add_error(
-                    "password", forms.ValidationError("비밀번호가 일치하지 않습니다")
-                )
-        except User.DoesNotExist:
-            self.add_error(
-                "email", forms.ValidationError("해당 이메일을 가진 유저가 없습니다")
+class LoginForm(forms.AuthenticationForm):
+    def confirm_login_allowed(self, user):
+        if not user.is_staff:
+            raise ValidationError(
+                "어드민 계정만 로그인이 가능합니다", code="NOT_STAFF_ERROR"
             )

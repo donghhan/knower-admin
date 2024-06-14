@@ -26,7 +26,7 @@ THIRDPARTY_APPS = []
 INSTALLED_APPS = DJANGO_BUILT_IN_APPS + THIRDPARTY_APPS + PROJECT_APPS
 
 
-MIDDLEWARE = [
+BUILT_IN_MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -35,6 +35,13 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+CUSTOM_MIDDLEWARE = [
+    "common.middleware.AllPagesLoginRequiredMiddleware",
+]
+
+
+MIDDLEWARE = BUILT_IN_MIDDLEWARE + CUSTOM_MIDDLEWARE
 
 ROOT_URLCONF = "config.urls"
 
@@ -98,5 +105,8 @@ MEDIA_URL = "media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# User model
+# Auth
 AUTH_USER_MODEL = "users.User"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/login"
+LOGIN_URL = LOGOUT_REDIRECT_URL

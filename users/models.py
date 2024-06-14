@@ -4,6 +4,7 @@ from common.models import TimeStampModel
 
 
 class User(AbstractUser, TimeStampModel):
+    username = None
     phone_number = models.CharField(
         max_length=128,
         verbose_name="전화번호",
@@ -11,7 +12,7 @@ class User(AbstractUser, TimeStampModel):
     )
     email = models.EmailField(unique=True, verbose_name="E-mail")
 
-    REQUIRED_FIELDS = ["username", "phone_number"]
+    REQUIRED_FIELDS = ["phone_number"]
     USERNAME_FIELD = "email"
 
     def __str__(self):

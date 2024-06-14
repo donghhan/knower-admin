@@ -12,18 +12,19 @@
 {% block content %}
     <main id="login">
         <section class="login__container">
-            <form method="post" enctype="multipart/form-data" class="form" id="login">
+            <form method="post" action="{% url 'common:login' %}" novalidate enctype="multipart/form-data" class="form" id="login">
                 {% csrf_token %}
                 <h1>Login</h1>
-                <div class="login__input_box">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="E-mail" />
-                </div>
-                <div class="login__input_box">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Password" />
-                </div>
-                <button type="submit" class="submit_btn">Submit</button>
+                {% for field in form %}
+                    <div class="login__input_box">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <small class="login__error">{{ field.errors|striptags }}</small>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <input type="submit" class="submit_btn" value="Submit" />
             </form>
         </section>
     </main>
