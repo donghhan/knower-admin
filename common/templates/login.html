@@ -1,0 +1,30 @@
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'css/users/login.css' %}">
+{% endblock css %}
+
+{% block title %}
+    <title>Knower | Login</title>
+{% endblock title %}
+
+{% block content %}
+    <main id="login">
+        <section class="login__container">
+            <form method="post" enctype="multipart/form-data" class="form" id="login">
+                {% csrf_token %}
+                <h1>Login</h1>
+                <div class="login__input_box">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="E-mail" />
+                </div>
+                <div class="login__input_box">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Password" />
+                </div>
+                <button type="submit" class="submit_btn">Submit</button>
+            </form>
+        </section>
+    </main>
+{% endblock content %}

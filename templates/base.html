@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="{% static 'css/components/header.css' %}">
     {% block css %}{% endblock css %}
     {% block js %}{% endblock js %}
-    <title>Knower Admin Panel</title>
+    <!-- title -->
+    {% block title %}{% endblock title %}
 </head>
 <body>
     {% include "components/header.html" %}

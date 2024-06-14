@@ -27,6 +27,12 @@ button {
   cursor: pointer;
 }
 
+input {
+  background: transparent;
+  outline: none;
+  border: none;
+}
+
 :root {
   --white: #fff;
   --yellow: #fdfd96;
