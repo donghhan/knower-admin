@@ -1,12 +1,59 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}
+    <title>Knower | All Users</title>
+{% endblock title%}
+
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/users/user_list.css' %}">
 {% endblock css %}
 
 {% block content %}
-    <section id="user_list">
-        <div></div>
-    </section>
+    <main class="container">
+        <section id="user_list" class="section__wrapper">
+            <div class="section__header__breadcrumb_wrapper">
+                {% with pathname as p %}
+                    {% include "components/section_header.html" %}
+                {% endwith %}
+                <form class="section__header__search_bar" method="get">
+                    <input type="text" placeholder="E-mail, 이름으로 검색 가능" name="user_search_keyword" />
+                    <button type="submit" hidden />
+                </form>
+            </div>
+        </section>
+        <section class="section__wrapper">
+            <div class="section__wrapper__body">
+                <table id="users">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>성함</th>
+                            <th>이메일</th>
+                            <th>전화번호</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.pk }}</td>
+                                {% if user.first_name and user.last_name %}
+                                    <td>{{ user.first_name }}&nbsp;{{ user.last_name }}</td>
+                                {% else %}
+                                    <td>-</td>
+                                {% endif %}
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.phone_number }}</td>
+                                <td>
+                                    <button>hi</button>
+                                    <button>hello</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
 {% endblock content %}

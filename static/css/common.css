@@ -1,0 +1,18 @@
+/* Section */
+main.container {
+  width: calc(100% - 15rem);
+  height: calc(100svh - 5rem);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--lightgray);
+}
+
+section.section__wrapper {
+  padding: 2em 5em;
+}
+
+section.section__wrapper .section__wrapper__body {
+  width: 100%;
+  background-color: var(--white);
+}
