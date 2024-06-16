@@ -21,7 +21,9 @@ PROJECT_APPS = [
     "users.apps.UsersConfig",
 ]
 
-THIRDPARTY_APPS = []
+THIRDPARTY_APPS = [
+    "django_seed",
+]
 
 INSTALLED_APPS = DJANGO_BUILT_IN_APPS + THIRDPARTY_APPS + PROJECT_APPS
 
@@ -92,7 +94,7 @@ TIME_ZONE = "UTC"
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

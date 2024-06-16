@@ -2,17 +2,21 @@
 main.container {
   width: calc(100% - 15rem);
   height: calc(100svh - 5rem);
-  position: absolute;
-  bottom: 0;
-  right: 0;
   background-color: var(--lightgray);
+  overflow: hidden;
 }
 
-section.section__wrapper {
+main.container .section__wrapper {
   padding: 2em 5em;
+  width: 100%;
+  height: auto;
+  min-height: 100svh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
 }
 
 section.section__wrapper .section__wrapper__body {
-  width: 100%;
   background-color: var(--white);
 }
