@@ -1,11 +1,1 @@
-const hamburgerBtn = document.querySelector(".hamburger_btn");
-const navbarMenu = document.querySelector(".navbar");
-const hamburgerCloseBtn = document.querySelector(".hamburger_close_btn");
-
-hamburgerBtn.addEventListener("click", () => {
-  navbarMenu.classList.add("open");
-});
-
-hamburgerCloseBtn.addEventListener("click", () => {
-  navbarMenu.classList.remove("open");
-});
+let e=document.querySelector(".hamburger_btn"),t=document.querySelector(".navbar"),o=document.querySelector(".hamburger_close_btn");e.addEventListener("click",()=>{t.classList.add("open"),document.body.style.overflow="hidden"}),o.addEventListener("click",()=>{t.classList.remove("open"),document.body.style.overflow="auto"}),window.addEventListener("resize",()=>{1024<=window.innerWidth?(t.classList.replace("mobile","desktop"),o.style.display="none"):(t.classList.replace("desktop","mobile"),o.style.display="block")});

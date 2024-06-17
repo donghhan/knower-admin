@@ -1,5 +1,11 @@
+# Client folder that contains all CSS, JS files 
+client/
+
 # DS Store
 .DS_Store
+
+# NPM 
+node_modules/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
