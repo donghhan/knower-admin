@@ -10,7 +10,7 @@ from users.forms import LoginForm
 
 
 def home(request):
-    return render(request, "home.html")
+    return render(request, "common/home.html")
 
 
 class LoginView(views.LoginView):
