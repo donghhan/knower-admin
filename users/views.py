@@ -1,6 +1,3 @@
-from typing import Any
-from django.core.paginator import Paginator
-from django.shortcuts import render
 from django.db.models import Q
 from django.views import generic
 from . import models
@@ -15,7 +12,7 @@ class UserListView(generic.ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(UserListView, self).get_context_data(*args, **kwargs)
-        context["pathname"] = f"All {self.request.path.replace('/', '').capitalize()}"
+        context["all_users"] = models.User.objects.all()
         return context
 
     def get_queryset(self):
