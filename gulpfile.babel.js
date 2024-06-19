@@ -54,6 +54,7 @@ function UglifyAndMinifyJS() {
     mangle: {
       toplevel: true,
       safari10: true,
+      keep_classnames: true,
     },
   };
 

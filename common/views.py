@@ -16,7 +16,7 @@ class HomeView(generic.TemplateView):
 
 
 class LoginView(auth_views.LoginView):
-    template_name = "login.html"
+    template_name = "users/login.html"
     redirect_authenticated_user = True
     authentication_form = LoginForm
     success_url = reverse_lazy("common:home")
