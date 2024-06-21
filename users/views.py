@@ -55,3 +55,4 @@ class UserProfileUpdateView(UpdateView):
         "is_active",
         "is_admin",
     ]
+    success_url = reverse_lazy("users:user_list")
