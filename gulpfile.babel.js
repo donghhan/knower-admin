@@ -20,7 +20,7 @@ const routes = {
   },
   js: {
     src: "client/js/**/*.js",
-    dest: "static",
+    dest: "static/js",
   },
 };
 
@@ -61,7 +61,6 @@ function UglifyAndMinifyJS() {
   return gulp
     .src(routes.js.src)
     .pipe(terser(terserOptions))
-    .pipe(concat("main.min.js"))
     .pipe(gulp.dest(routes.js.dest))
     .pipe(browserSync.stream());
 }

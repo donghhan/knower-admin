@@ -1,0 +1,1 @@
+const e=document.querySelector(".extra_menu__toggle_btn"),t=document.querySelector(".extra_menu__menu");e.addEventListener("click",(()=>{t.classList.contains("open")?t.classList.remove("open"):t.classList.add("open")}));

@@ -18,6 +18,11 @@ class User(AbstractUser, TimeStampModel):
     def __str__(self):
         return self.get_full_name()
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+
+        return reverse("users:user_update", kwargs={"pk": self.pk})
+
     class Meta:
         db_table = "users"
         verbose_name = "회원"

@@ -1,6 +1,9 @@
 from django.db.models import Q
 from django.views import generic
-from . import models
+from django.views.generic.edit import UpdateView
+from django.urls import reverse_lazy
+from django.contrib import messages
+from . import models, forms
 
 
 class UserListView(generic.ListView):
@@ -41,3 +44,34 @@ class UserSearchView(generic.ListView):
         context = super(UserSearchView, self).get_context_data(*args, **kwargs)
         context["searched_user"] = self.get_queryset()
         return context
+
+
+class UserProfileUpdateView(UpdateView):
+    context_object_name = "user"
+    template_name = "users/user_detail.html"
+    model = models.User
+    success_url = reverse_lazy("users:user_list")
+    fields = [
+        "first_name",
+        "last_name",
+        "email",
+        "phone_number",
+        "is_active",
+        "is_staff",
+    ]
+
+    def form_valid(self, form):
+        messages.success(self.request, "Profile updated successfully.")
+        return super().form_valid(form)
+
+    # fields = [
+    #     "first_name",
+    #     "last_name",
+    #     "email",
+    #     "phone_number",
+    #     "is_active",
+    #     "is_staff",
+    # ]
+
+    # def get_success_url(self):
+    #     return reverse_lazy("users:user_list")

@@ -1,0 +1,1 @@
+const e=document.getElementById("user_email");function t(t){for(let n=e.length;n--;)e[n].style.left=t.pageX+"px",e[n].style.top=t.pageY+"px"}document.addEventListener("mousemove",t,!1);
