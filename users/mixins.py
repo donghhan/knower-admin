@@ -12,3 +12,7 @@ class LoggedOutOnlyView(UserPassesTestMixin):
     def handle_no_permission(self) -> HttpResponseRedirect:
         messages.error(self.request, "You should be logged out")
         return redirect("common:home")
+
+
+class StaffOnlyView:
+    pass

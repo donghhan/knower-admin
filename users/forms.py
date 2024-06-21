@@ -6,7 +6,7 @@ from users.models import User
 
 class LoginForm(auth_form.AuthenticationForm):
     def confirm_login_allowed(self, user):
-        if not user.is_staff:
+        if not user.is_admin:
             raise ValidationError(
                 "어드민 계정만 로그인이 가능합니다", code="NOT_STAFF_ERROR"
             )
@@ -21,7 +21,7 @@ class UserProfileUpdateForm(forms.ModelForm):
             "email",
             "phone_number",
             "is_active",
-            "is_staff",
+            "is_admin",
         ]
         widgets = {
             "first_name": forms.TextInput(attrs={"placeholder": "이름"}),

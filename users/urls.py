@@ -5,12 +5,9 @@ app_name = "users"
 
 urlpatterns = [
     path(
-        "<int:pk>/",
+        "<int:pk>/update/",
         views.UserProfileUpdateView.as_view(extra_context={"title": "Update User"}),
         name="user_update",
-    ),
-    path(
-        "<str:user_search_keyword>/", views.UserSearchView.as_view(), name="user_search"
     ),
     path(
         "",
