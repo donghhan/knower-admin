@@ -28,6 +28,11 @@ class Product(TimeStampModel):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+
+        return reverse("products:product_update", kwargs={"pk": self.pk})
+
     class Meta:
         db_table = "products"
         verbose_name = "상품"
