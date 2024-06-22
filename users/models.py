@@ -65,16 +65,10 @@ class User(AbstractBaseUser, TimeStampModel):
         return f"{self.last_name} {self.first_name}"
 
     def has_perm(self, perm, obj=None):
-        if self.user.is_admin:
-            return True
-        else:
-            return False
+        return self.is_admin
 
-    def has_module_perm(self, app_label):
-        if self.user.is_admin:
-            return True
-        else:
-            return False
+    def has_module_perms(self, app_label):
+        return self.is_admin
 
     def get_absolute_url(self):
         from django.urls import reverse

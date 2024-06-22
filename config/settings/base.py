@@ -19,6 +19,7 @@ DJANGO_BUILT_IN_APPS = [
 PROJECT_APPS = [
     "common.apps.CommonConfig",
     "users.apps.UsersConfig",
+    "products.apps.ProductsConfig",
 ]
 
 THIRDPARTY_APPS = [
