@@ -1,11 +1,11 @@
 from django.db.models import Q
-from django.views import generic
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from . import models
 
 
-class UserListView(generic.ListView):
+class UserListView(ListView):
     model = models.User
     paginate_by = 20
     paginate_orphans = 5
@@ -24,13 +24,14 @@ class UserListView(generic.ListView):
         return super().paginate_queryset(queryset, page_size)
 
 
-class UserSearchView(generic.ListView):
+class UserSearchView(ListView):
     model = models.User
+    template_name = "users/user_detail.html"
 
     def get_queryset(self):
         user_search_keyword = self.kwargs.get("user_search_keyword")
         if user_search_keyword:
-            queryset = models.User.objects.get(
+            queryset = models.User.objects.filter(
                 Q(email__icontains=user_search_keyword)
                 | Q(first_name__icontains=user_search_keyword)
                 | Q(last_name__icontains=user_search_keyword)
@@ -47,7 +48,7 @@ class UserSearchView(generic.ListView):
 
 class UserProfileUpdateView(UpdateView):
     model = models.User
-    template_name = "users/user_detail.html"
+    template_name = "users/user_update.html"
     fields = [
         "first_name",
         "last_name",
