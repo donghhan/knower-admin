@@ -42,7 +42,7 @@ class UserSearchView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(UserSearchView, self).get_context_data(*args, **kwargs)
-        context["searched_user"] = self.get_queryset()
+        context["searched_users"] = self.get_queryset()
         return context
 
 
