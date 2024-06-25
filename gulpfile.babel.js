@@ -28,7 +28,11 @@ function MinifyHTML() {
   return gulp
     .src(routes.html.src)
     .pipe(
-      htmlmin({ collapseWhitespace: true, collapseBooleanAttributes: true })
+      htmlmin({
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true,
+        ignoreCustomFragments: [/{%[\s\S]*?%}/],
+      })
     )
     .pipe(gulp.dest(routes.html.dest))
     .pipe(browserSync.stream());
