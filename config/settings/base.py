@@ -62,6 +62,7 @@ TEMPLATES = [
             ],
             "libraries": {
                 "paginator_tags": "common.templatetags.paginator_tags",
+                "template_tags": "common.templatetags.template_tags",
             },
         },
     },

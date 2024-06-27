@@ -1,5 +1,5 @@
 from django.db.models import Q
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from . import models
@@ -26,19 +26,16 @@ class UserListView(ListView):
 
 class UserSearchView(ListView):
     model = models.User
-    template_name = "users/user_detail.html"
+    template_name = "users/user_search.html"
 
     def get_queryset(self):
-        user_search_keyword = self.kwargs.get("user_search_keyword")
-        if user_search_keyword:
-            queryset = models.User.objects.filter(
-                Q(email__icontains=user_search_keyword)
-                | Q(first_name__icontains=user_search_keyword)
-                | Q(last_name__icontains=user_search_keyword)
-            )
-        else:
-            queryset = models.User.objects.none()
-        return queryset
+        search_keyword = self.request.GET.get("search_keyword")
+        object_list = models.User.objects.filter(
+            Q(email__icontains=search_keyword)
+            | Q(first_name__icontains=search_keyword)
+            | Q(last_name__icontains=search_keyword)
+        )
+        return object_list
 
     def get_context_data(self, *args, **kwargs):
         context = super(UserSearchView, self).get_context_data(*args, **kwargs)
