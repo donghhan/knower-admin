@@ -9,24 +9,15 @@ class UserListView(ListView):
     model = models.User
     paginate_by = 20
     paginate_orphans = 5
-    ordering = "created_at"
     context_object_name = "users"
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(UserListView, self).get_context_data(*args, **kwargs)
-        context["all_users"] = models.User.objects.all()
-        return context
-
-    def get_queryset(self):
-        return models.User.objects.all()
-
-    def paginate_queryset(self, queryset, page_size):
-        return super().paginate_queryset(queryset, page_size)
 
 
 class UserSearchView(ListView):
     model = models.User
     template_name = "users/user_search.html"
+    paginate_by = 20
+    paginate_orphans = 5
+    context_object_name = "searched_users"
 
     def get_queryset(self):
         search_keyword = self.request.GET.get("search_keyword")
@@ -36,11 +27,6 @@ class UserSearchView(ListView):
             | Q(last_name__icontains=search_keyword)
         )
         return object_list
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(UserSearchView, self).get_context_data(*args, **kwargs)
-        context["searched_users"] = self.get_queryset()
-        return context
 
 
 class UserProfileUpdateView(UpdateView):

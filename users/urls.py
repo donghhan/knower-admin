@@ -9,7 +9,7 @@ urlpatterns = [
         views.UserSearchView.as_view(
             extra_context={
                 "title": "User Search",
-                "url_resolver": "users:user_search",
+                "search_view_url_resolver": "users:user_search",
             }
         ),
         name="user_search",
@@ -24,7 +24,7 @@ urlpatterns = [
         views.UserListView.as_view(
             extra_context={
                 "title": "All Users",
-                "url_resolver": "users:user_search",
+                "search_view_url_resolver": "users:user_search",
             }
         ),
         name="user_list",
