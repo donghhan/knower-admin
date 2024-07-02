@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from common.models import TimeStampModel
 
@@ -32,6 +33,12 @@ class Product(TimeStampModel):
         from django.urls import reverse
 
         return reverse("products:product_update", kwargs={"pk": self.pk})
+
+    def clean(self):
+        if self.discount_price:
+            if self.discount_price >= self.price:
+                raise ValidationError("할인가는 정가보다 작아야 합니다")
+        super().clean()
 
     class Meta:
         db_table = "products"
@@ -69,12 +76,17 @@ class ProductColor(models.Model):
     product = models.ManyToManyField(
         Product, verbose_name="상품", related_name="products"
     )
-    color = models.CharField(
-        max_length=32, verbose_name="컬러", help_text="영문 혹은 한글로 전부 통일할것"
+    color = models.CharField(max_length=32, verbose_name="컬러", help_text="상품 컬러")
+    hex_code = models.CharField(
+        max_length=7, verbose_name="HEX코드", help_text="# 없이 6자리 코드만 기입"
     )
 
     def __str__(self):
         return self.color
+
+    def save(self, *args, **kwargs):
+        self.hex_code = "#" + self.hex_code.upper()
+        return super(ProductColor, self).save(*args, **kwargs)
 
     class Meta:
         db_table = "product_colors"
@@ -91,7 +103,8 @@ class ProductPhoto(models.Model):
         verbose_name="상품",
         related_name="product_photos",
     )
-    photo = models.URLField(verbose_name="사진", null=True, blank=True)
+    photo_file = models.FileField()
+    photo_url = models.URLField(verbose_name="사진", null=True, blank=True)
 
     def __str__(self):
         return f"{self.product.name}"
